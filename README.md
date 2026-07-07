@@ -1,0 +1,1 @@
+Run init_database.php once, then open index.php.
