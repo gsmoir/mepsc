@@ -6,14 +6,14 @@
  * File: init_database.php
  *
  * Description:
- * Creates the SQLite database schema required by MEPSC.
+ * Creates the MySQL database schema required by MEPSC.
  *
  * Safe to execute multiple times.
  *
  * Technology:
  * - PHP 8+
- * - SQLite (PDO)
- * *
+ * - MySQL (PDO)
+ *
  * Usage:
  *     http://localhost/MEPSC/init_database.php
  *
@@ -33,10 +33,11 @@ try {
     | Create sentence_pairs table
     |--------------------------------------------------------------------------
     */
+
     $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS sentence_pairs
 (
-    corpus_id TEXT PRIMARY KEY,
+    corpus_id VARCHAR(100) NOT NULL PRIMARY KEY,
 
     manipuri TEXT NOT NULL,
 
@@ -46,14 +47,17 @@ CREATE TABLE IF NOT EXISTS sentence_pairs
 
     english_audio TEXT NOT NULL,
 
-    speaker_id TEXT,
+    speaker_id VARCHAR(100),
 
-    domain TEXT,
+    domain VARCHAR(100),
 
     remarks TEXT,
 
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
 SQL;
 
     $pdo->exec($sql);
@@ -62,55 +66,74 @@ SQL;
     |--------------------------------------------------------------------------
     | Indexes
     |--------------------------------------------------------------------------
-    |
-    | These indexes improve search performance for the public portal.
-    |
     */
 
     $pdo->exec(
-        "CREATE INDEX IF NOT EXISTS idx_sentence_pairs_manipuri
-         ON sentence_pairs(manipuri);"
+        "CREATE INDEX idx_sentence_pairs_manipuri
+         ON sentence_pairs (manipuri(255));"
     );
 
     $pdo->exec(
-        "CREATE INDEX IF NOT EXISTS idx_sentence_pairs_english
-         ON sentence_pairs(english);"
+        "CREATE INDEX idx_sentence_pairs_english
+         ON sentence_pairs (english(255));"
     );
 
     $pdo->exec(
-        "CREATE INDEX IF NOT EXISTS idx_sentence_pairs_speaker
-         ON sentence_pairs(speaker_id);"
+        "CREATE INDEX idx_sentence_pairs_speaker
+         ON sentence_pairs (speaker_id);"
     );
 
     $pdo->exec(
-        "CREATE INDEX IF NOT EXISTS idx_sentence_pairs_domain
-         ON sentence_pairs(domain);"
+        "CREATE INDEX idx_sentence_pairs_domain
+         ON sentence_pairs (domain);"
     );
 
 } catch (PDOException $e) {
 
-    http_response_code(500);
+    /*
+    |--------------------------------------------------------------------------
+    | Ignore duplicate index errors
+    |--------------------------------------------------------------------------
+    |
+    | Table creation uses IF NOT EXISTS, but CREATE INDEX in MySQL does not.
+    |
+    */
 
-    exit(
-        '<h2>Database Initialization Failed</h2>' .
-        '<p>' . htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</p>'
-    );
+    if ($e->getCode() !== '42000') {
+
+        http_response_code(500);
+
+        exit(
+            '<h2>Database Initialization Failed</h2>' .
+            '<p>' .
+            htmlspecialchars(
+                $e->getMessage(),
+                ENT_QUOTES | ENT_SUBSTITUTE,
+                'UTF-8'
+            ) .
+            '</p>'
+        );
+
+    }
+
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
 
-    <title>MEPSC Database Initialization</title>
+<title>MEPSC Database Initialization</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    rel="stylesheet">
 
 </head>
 
@@ -118,77 +141,84 @@ SQL;
 
 <div class="container py-5">
 
-    <div class="row justify-content-center">
+<div class="row justify-content-center">
 
-        <div class="col-lg-8">
+<div class="col-lg-8">
 
-            <div class="card shadow">
+<div class="card shadow">
 
-                <div class="card-header bg-success text-white">
-                    <h3 class="mb-0">
-                        MEPSC Database Initialization
-                    </h3>
-                </div>
+<div class="card-header bg-success text-white">
 
-                <div class="card-body">
+<h3 class="mb-0">
+MEPSC Database Initialization
+</h3>
 
-                    <div class="alert alert-success mb-4">
+</div>
 
-                        <strong>Success!</strong>
+<div class="card-body">
 
-                        <br><br>
+<div class="alert alert-success mb-4">
 
-                        The SQLite database has been initialized successfully.
+<strong>Success!</strong>
 
-                    </div>
+<br><br>
 
-                    <table class="table table-bordered">
+The MySQL database has been initialized successfully.
 
-                        <tbody>
+</div>
 
-                        <tr>
-                            <th width="220">Application</th>
-                            <td><?php echo htmlspecialchars(APP_NAME); ?></td>
-                        </tr>
+<table class="table table-bordered">
 
-                        <tr>
-                            <th>Version</th>
-                            <td><?php echo htmlspecialchars(APP_VERSION); ?></td>
-                        </tr>
+<tbody>
 
-                        <tr>
-                            <th>Database File</th>
-                            <td><?php echo htmlspecialchars(DATABASE_FILE); ?></td>
-                        </tr>
+<tr>
+<th width="220">Application</th>
+<td><?php echo htmlspecialchars(APP_NAME); ?></td>
+</tr>
 
-                        <tr>
-                            <th>Main Table</th>
-                            <td>sentence_pairs</td>
-                        </tr>
+<tr>
+<th>Version</th>
+<td><?php echo htmlspecialchars(APP_VERSION); ?></td>
+</tr>
 
-                        <tr>
-                            <th>Status</th>
-                            <td class="text-success">
-                                Ready
-                            </td>
-                        </tr>
+<tr>
+<th>Database Server</th>
+<td><?php echo htmlspecialchars(DB_HOST); ?></td>
+</tr>
 
-                        </tbody>
+<tr>
+<th>Database</th>
+<td><?php echo htmlspecialchars(DB_NAME); ?></td>
+</tr>
 
-                    </table>
+<tr>
+<th>Main Table</th>
+<td>sentence_pairs</td>
+</tr>
 
-                    <a href="index.php"
-                       class="btn btn-primary">
-                        Go to Public Portal
-                    </a>
+<tr>
+<th>Status</th>
+<td class="text-success">
+Ready
+</td>
+</tr>
 
-                </div>
+</tbody>
 
-            </div>
+</table>
 
-        </div>
+<a href="index.php"
+   class="btn btn-primary">
+Go to Public Portal
+</a>
 
-    </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 

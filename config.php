@@ -9,13 +9,13 @@
  *
  * Responsibilities:
  * - Application configuration
- * - PDO SQLite database connection
+ * - PDO MySQL database connection
  * - Session initialization
  * - Global constants
  *
  * Technology:
  * - PHP 8+
- * - PDO (SQLite)
+ * - PDO (MySQL)
  *
  * Encoding:
  * - UTF-8
@@ -28,10 +28,6 @@ declare(strict_types=1);
 |--------------------------------------------------------------------------
 | Error Reporting
 |--------------------------------------------------------------------------
-|
-| Disable error display in production.
-| Enable logging if required.
-|
 */
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
@@ -74,8 +70,6 @@ define('APP_VERSION', '1.0');
 |--------------------------------------------------------------------------
 */
 define('BASE_PATH', __DIR__);
-define('DATABASE_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'database');
-define('DATABASE_FILE', DATABASE_PATH . DIRECTORY_SEPARATOR . 'mepsc.sqlite');
 
 define(
     'MANIPURI_AUDIO_PATH',
@@ -108,26 +102,51 @@ define('ADMIN_PASSWORD', 'admin123');
 
 /*
 |--------------------------------------------------------------------------
+| MySQL Database Configuration
+|--------------------------------------------------------------------------
+|
+| Default XAMPP Settings
+|
+*/
+define('DB_HOST', 'localhost');
+define('DB_PORT', '3306');
+define('DB_NAME', 'mepsc');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_CHARSET', 'utf8mb4');
+
+/*
+|--------------------------------------------------------------------------
 | Database Connection
 |--------------------------------------------------------------------------
 */
 try {
-    $pdo = new PDO('sqlite:' . DATABASE_FILE);
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $dsn = sprintf(
+        'mysql:host=%s;port=%s;dbname=%s;charset=%s',
+        DB_HOST,
+        DB_PORT,
+        DB_NAME,
+        DB_CHARSET
+    );
 
-    // Improve SQLite concurrency
-    $pdo->exec('PRAGMA foreign_keys = ON;');
-    $pdo->exec('PRAGMA journal_mode = WAL;');
-    $pdo->exec('PRAGMA synchronous = NORMAL;');
+    $pdo = new PDO(
+        $dsn,
+        DB_USER,
+        DB_PASS,
+        [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ]
+    );
 
 } catch (PDOException $e) {
-    http_response_code(500);
 
-    exit(
-        'Database connection failed.'
-    );
+    // http_response_code(500);
+
+    // exit('Database connection failed.');
+
+    die($e->getMessage());
 }
 ?>
