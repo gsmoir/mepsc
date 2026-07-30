@@ -53,7 +53,8 @@ if ($q === '') {
 */
 $allowedFields = [
     'manipuri',
-    'english'
+    'english',
+    'remarks'
 ];
 
 if (!in_array($field, $allowedFields, true)) {
@@ -69,7 +70,8 @@ $sql = "
     SELECT
         corpus_id,
         manipuri,
-        english
+        english,
+        remarks
     FROM
         sentence_pairs
     WHERE

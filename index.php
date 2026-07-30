@@ -311,6 +311,9 @@ require_once __DIR__ . '/config.php';
                                 <option value="manipuri">
                                     Manipuri
                                 </option>
+                                <option value="remarks">
+                                    Manipuri-Transliterated
+                                </option>
 
 
 
@@ -601,9 +604,24 @@ function performSearch()
 
             data.forEach(function (row)
             {
-                const displayText = (searchType.value === 'english')
-                    ? row.english
-                    : row.manipuri;
+                // const displayText = (searchType.value === 'english')
+                //     ? row.english
+                //     : row.manipuri;
+
+                let displayText;
+
+                if(searchType.value === 'english')
+                {
+                    displayText = row.english;
+                }
+                else if(searchType.value === 'remarks')
+                {
+                    displayText = row.remarks;
+                }
+                else
+                {
+                    displayText = row.manipuri;
+                }
 
                 results.innerHTML +=
                     '<tr class="result-row">' +
@@ -737,13 +755,30 @@ function loadSentence(id)
 
                     '</div>' +
                 '</div>' +
-
                 '<div class="mep-detail-item">' +
-                    '<div class="mep-label">Transliteration</div>' +
+                    '<div class="mep-label">Manipuri</div>' +
                     '<div class="mep-value">' +
-                        escapeHtml(row.remarks ?? '') +
+
+                        '<span>' +
+                        escapeHtml(row.remarks) +
+                        '</span>' +
+
+                        '<audio id="audio_m">' +
+                            '<source src="audio/manipuri/' +
+                            row.manipuri_audio +
+                            '" type="audio/mpeg">' +
+                        '</audio>' +
+
+                        '<button class="mep-audio-btn" onclick="playAudioM()">🔊</button>' +
+
                     '</div>' +
                 '</div>' +
+                // '<div class="mep-detail-item">' +
+                //     '<div class="mep-label">Transliteration</div>' +
+                //     '<div class="mep-value">' +
+                //         escapeHtml(row.remarks ?? '') +
+                //     '</div>' +
+                // '</div>' +
 
                 '<div class="mep-detail-item">' +
                     '<div class="mep-label">Corpus Details</div>' +
@@ -779,22 +814,34 @@ function escapeHtml(text)
 }
 
 function playAudioM() {
-  var audio = document.getElementById("audio_m");
+  // var audio = document.getElementById("audio_m");
+  const m = document.getElementById("audio_m");
+  const e = document.getElementById("audio_e");
 
-  if (audio.paused) {
-    audio.play();
+  e.pause();
+  e.cuurentTime = 0;
+  
+  if (m.paused) {
+    m.play();
   } else {
-    audio.pause();
+    m.pause();
+    m.currentTime=0;
   }
 }
 
 function playAudioE() {
-  var audio = document.getElementById("audio_e");
+  // var audio = document.getElementById("audio_e");
+  const m = document.getElementById("audio_m");
+  const e = document.getElementById("audio_e");
 
-  if (audio.paused) {
-    audio.play();
+  m.pause();
+  m.cuurentTime = 0;
+  
+  if (e.paused) {
+    e.play();
   } else {
-    audio.pause();
+    e.pause();
+    e.currentTime=0;
   }
 }
 

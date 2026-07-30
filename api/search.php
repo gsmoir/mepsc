@@ -3,7 +3,7 @@
 require_once "../config.php";
 
 // Only allow these searchable columns
-$allowedLanguages = ['manipuri', 'english'];
+$allowedLanguages = ['manipuri', 'english', 'remarks'];
 
 $language = $_GET['language'] ?? 'manipuri';
 $keyword  = trim($_GET['keyword'] ?? '');
