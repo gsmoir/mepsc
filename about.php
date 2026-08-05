@@ -109,7 +109,7 @@ require_once __DIR__ . '/config.php';
                         <div class="d-flex justify-content-between align-items-start">
 
                             <a href="index.php" class="mep-logo">
-                                MEPSC
+                                <img src="favicon.png" alt="A description of the image" width="50" height="50"><img>
                             </a>
 
                             <div class="dropdown">
@@ -134,7 +134,7 @@ require_once __DIR__ . '/config.php';
                                     <li>
                                         <a class="dropdown-item" href="about.php">
                                             <i class="bi bi-info-circle me-2"></i>
-                                            About MEPSC
+                                            About LangdaiTranslate
                                         </a>
                                     </li>
 
@@ -156,7 +156,7 @@ require_once __DIR__ . '/config.php';
                         </h1> -->
 
                         <p class="mep-title">
-                            Manipuri–English Travel Guide
+                            LangdaiTranslate
                         </p>
 
                         <div class="mep-badge">
@@ -236,16 +236,12 @@ require_once __DIR__ . '/config.php';
                 <div class="card-body p-5">
 
                     <h3 class="mb-4">
-                        About MEPSC
+                        About LangdaiTranslate
                     </h3>
 
                     <p class="lead">
 
-                        The <strong>Manipuri–English Parallel Speech Corpus (MEPSC)</strong>
-                        is a bilingual speech corpus developed to support
-                        research in Natural Language Processing (NLP),
-                        Speech Technology, and Artificial Intelligence for
-                        the Manipuri (Meiteilon) language.
+                        The <strong>Langdai Language Corpus (LLC)</strong> is a bilingual speech corpus developed to support research in Natural Language Processing (NLP), Speech Technology, and Artificial Intelligence for the Manipuri (Meiteilon) language. The <strong>LangdaiTranslate</strong> is the product of the LLC developed to facilitate English-Manipuri translation through text and speech.
 
                     </p>
 

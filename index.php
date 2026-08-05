@@ -163,8 +163,11 @@ require_once __DIR__ . '/config.php';
 
                         <div class="d-flex justify-content-between align-items-start">
 
+                            <!-- <a href="index.php" class="mep-logo">
+                                LangdaiTranslate
+                            </a> -->
                             <a href="index.php" class="mep-logo">
-                                MEPSC
+                                <img src="favicon.png" alt="A description of the image" width="50" height="50"><img>
                             </a>
 
                             <div class="dropdown">
@@ -189,7 +192,7 @@ require_once __DIR__ . '/config.php';
                                     <li>
                                         <a class="dropdown-item" href="about.php">
                                             <i class="bi bi-info-circle me-2"></i>
-                                            About MEPSC
+                                            About LangdaiTranslate
                                         </a>
                                     </li>
 
@@ -211,7 +214,7 @@ require_once __DIR__ . '/config.php';
                         </h1> -->
 
                         <p class="mep-title">
-                            Manipuri–English Travel Guide
+                            LangdaiTranslate
                         </p>
 
                         <div class="mep-badge">
@@ -269,7 +272,7 @@ require_once __DIR__ . '/config.php';
 
                                 <li>
                                     <a class="dropdown-item" href="about.php">
-                                        About MEPSC
+                                        About LangdaiTranslate
                                     </a>
                                 </li>
 
@@ -309,10 +312,10 @@ require_once __DIR__ . '/config.php';
                                     English
                                 </option>
                                 <option value="manipuri">
-                                    Manipuri
+                                    Manipuri/Meeteilon (Meetei Mayek)
                                 </option>
                                 <option value="remarks">
-                                    Manipuri-Transliterated
+                                    Manipuri/Meeteilon (Roman Script)
                                 </option>
 
 
@@ -501,7 +504,7 @@ require_once __DIR__ . '/config.php';
                         </div>
 
                         <div class="footer-copy">
-                            © <?php echo date('Y'); ?> MEPSC Research Project
+                            © <?php echo date('Y'); ?> LangdaiTranslate Research Project
                         </div>
 
                     </div>

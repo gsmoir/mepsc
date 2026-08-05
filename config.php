@@ -61,7 +61,7 @@ if (session_status() === PHP_SESSION_NONE) {
 | Application Information
 |--------------------------------------------------------------------------
 */
-define('APP_NAME', 'MEPSC');
+define('APP_NAME', 'LangdaiTranslate');
 define('APP_VERSION', '1.0');
 
 /*
