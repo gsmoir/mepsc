@@ -239,38 +239,58 @@ require_once __DIR__ . '/config.php';
                         About LangdaiTranslate
                     </h3>
 
-                    <p class="lead">
+                    <p class="mt-4" style="text-align: justify;">
 
-                        The <strong>Langdai Language Corpus (LLC)</strong> is a bilingual speech corpus developed to support research in Natural Language Processing (NLP), Speech Technology, and Artificial Intelligence for the Manipuri (Meiteilon) language. The <strong>LangdaiTranslate</strong> is the product of the LLC developed to facilitate English-Manipuri translation through text and speech.
+                        <!--The <strong>Lan gdai Language Corpus (LLC)</strong> is a bilingual speech corpus developed to support research in Natural Language Processing (NLP), Speech Technology, and Artificial Intelligence for the Manipuri (Meiteilon) language. The <strong>LangdaiTranslate</stron is the product of the LLC developed to facilitate English-Manipuri translation through text and speech.
+                        -->
+                        <strong>Langdai Translate</strong>  is a bilingual Manipuri (Meeteilon)–English translation platform that supports Meetei Mayek, Roman script, and English, with integrated text-to-speech in both languages. It enables users to translate text and instantly listen to the translated output, making communication, language learning, and accessibility easier. As one of the first platforms to combine bidirectional Manipuri–English translation with speech synthesis for both languages, Langdai Translate aims to promote accurate, accessible, and inclusive language technology.
+                        <br><br>
+                        Developed under a Minor Research Project funded by the Department of Science & Technology (DST), Government of Manipur, the project is led by Dr. Akoijam Malemnganbi (Principal Investigator) and Dr. Leihaorambam Sarbajit Singh, Professor of Linguistics, School of Social Sciences and Humanities, Khongnangthaba University (Co-Principal Investigator). The platform is currently powered by a small, curated bilingual corpus, which is available to researchers and developers interested in Natural Language Processing, translation studies, and related fields. The corpus has been designed to be extensible, allowing new vocabulary, domains, and linguistic resources to be incorporated over time to continually improve the system's coverage and translation quality.
+
+                        <!-- 
+                        Dr. Takhellambam Sandhyalata, Assistant Professor, Department of Linguistics, Naorem Birahari College – Translator; 
+                        Ms. Silky Chanambam, AIR Imphal – Manipuri Voice Artist; 
+                        Ms. Rambha Phairembam, Ph.D. Candidate, Department of Mass Communication, Manipur University – English Voice Artist; 
+                        Mr. Gourashyam Moirangthem, Ph.D. Candidate, Department of Computer Science and Engineering, IIIT Manipur – Software Developer; 
+                        Mr. Thoungamba Naorem, MA Library and Information Sciences, Manipur University – Corpus Curation, Data Validation, Data Cleaning, and Quality Control. -->
+
 
                     </p>
 
                     <hr class="my-5">
 
                     <h4>
-                        Objectives
+                        Project team:
                     </h4>
 
                     <ul class="mt-3">
 
                         <li>
-                            Develop a high-quality parallel speech corpus.
+                            Dr. Akoijam Malemnganbi, Asst. Professor, Dept. of Humanities and Basic Sciences, IIIT Manipur -  Principal Investigator
                         </li>
 
                         <li>
-                            Support research in Machine Translation.
+                            Dr. Leihaorambam Sarbajit Singh, Professor of Linguistics, School of Social Sciences and Humanities, Khongnangthaba University - Co-Principal Investigator
                         </li>
 
                         <li>
-                            Facilitate Automatic Speech Recognition (ASR).
+                            Dr. Takhellambam Sandhyalata, Asst. Professor, Dept. of Linguistics, Naorem Birahari College – Translator
                         </li>
 
                         <li>
-                            Support Text-to-Speech (TTS) development.
+                            Ms. Silky Chanambam, AIR Imphal – Manipuri Voice Artist
                         </li>
 
                         <li>
-                            Promote digital resources for Manipuri.
+                            Ms. Rambha Phairembam, Ph.D. Candidate, Dept. of Mass Communication, Manipur University – English Voice Artist
+                        </li>
+
+                        <li>
+                            Mr. Gourashyam Moirangthem, Ph.D. Candidate, Dept. of Computer Science and Engineering, IIIT Manipur – Software Developer
+                        </li>
+
+                        <li>
+                            Mr. Thoungamba Naorem, MA Library and Information Sciences, Manipur University – Corpus Curation, Data Validation, Data Cleaning, and Quality Control.
                         </li>
 
                     </ul>
@@ -334,7 +354,7 @@ require_once __DIR__ . '/config.php';
                             </div>
 
                             <div class="mep-value">
-                                Manipuri–English Parallel Speech Corpus
+                                Langdai Translate
                             </div>
 
                         </div>
@@ -361,7 +381,7 @@ require_once __DIR__ . '/config.php';
                         >
                             <i class="bi bi-search me-2"></i>
 
-                            Search Corpus
+                            Search
 
                         </a>
 
@@ -382,7 +402,7 @@ require_once __DIR__ . '/config.php';
                         </div>
 
                         <div class="footer-text">
-                            Manipuri-English Parallel Speech Corpus
+                            LangdaiTranslate
                         </div>
 
                     </div>
