@@ -214,7 +214,7 @@ require_once __DIR__ . '/config.php';
                         </h1> -->
 
                         <p class="mep-title">
-                            LangdaiTranslate
+                            Langdai Translate
                         </p>
 
                         <div class="mep-badge">
